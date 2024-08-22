@@ -12,7 +12,7 @@ class DataAnalysis:
     def __init__(self, csv_file):
         self.df = pd.read_csv(csv_file)
         self.options = ['Selecciona una opción', 'Gráficos diversos',
-                        'Primeras y últimas 5 columnas', 'Grafico de línea y Matriz de Correlación', 'Analizar Fechas', "Medidas de Tendencia Central", "Pairplots", "Análisis por Localidad"]
+                        'Primeras y últimas 5 columnas', 'Grafico de línea y Matriz de Correlación', 'Analizar Fechas', "Medidas de Tendencia Central", "Pairplots", "Análisis por Localidad y Departmento"]
 
     def pair_plots(self):
         df = self.get_df()
@@ -194,6 +194,73 @@ class DataAnalysis:
 
         st.write("# Gente de San Francisco")
         df_san_francisco = df[df["Location"] == "San Francisco"]
+
+        sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
+        sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
+
+        fig = px.histogram(df_san_francisco, x='Salary', nbins=sturges_salary)
+        fig2 = px.histogram(df_san_francisco, x='Age', nbins=sturges_age)
+
+        st.plotly_chart(fig)
+        st.plotly_chart(fig2)
+        st.write(df_san_francisco.describe())
+
+        st.write("# Por departamento")
+        st.write("## Ingeniería")
+
+        df_san_francisco = df[df["Department"] == "Engineering"]
+
+        sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
+        sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
+
+        fig = px.histogram(df_san_francisco, x='Salary', nbins=sturges_salary)
+        fig2 = px.histogram(df_san_francisco, x='Age', nbins=sturges_age)
+
+        st.plotly_chart(fig)
+        st.plotly_chart(fig2)
+        st.write(df_san_francisco.describe())
+
+        st.write("## Finanzas")
+        df_san_francisco = df[df["Department"] == "Finance"]
+
+        sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
+        sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
+
+        fig = px.histogram(df_san_francisco, x='Salary', nbins=sturges_salary)
+        fig2 = px.histogram(df_san_francisco, x='Age', nbins=sturges_age)
+
+        st.plotly_chart(fig)
+        st.plotly_chart(fig2)
+        st.write(df_san_francisco.describe())
+
+        st.write("## Recursos Humanos")
+        df_san_francisco = df[df["Department"] == "HR"]
+
+        sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
+        sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
+
+        fig = px.histogram(df_san_francisco, x='Salary', nbins=sturges_salary)
+        fig2 = px.histogram(df_san_francisco, x='Age', nbins=sturges_age)
+
+        st.plotly_chart(fig)
+        st.plotly_chart(fig2)
+        st.write(df_san_francisco.describe())
+
+        st.write("## Marketing")
+        df_san_francisco = df[df["Department"] == "Marketing"]
+
+        sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
+        sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
+
+        fig = px.histogram(df_san_francisco, x='Salary', nbins=sturges_salary)
+        fig2 = px.histogram(df_san_francisco, x='Age', nbins=sturges_age)
+
+        st.plotly_chart(fig)
+        st.plotly_chart(fig2)
+        st.write(df_san_francisco.describe())
+
+        st.write("## Gestión")
+        df_san_francisco = df[df["Department"] == "Mgmt"]
 
         sturges_salary = 1 + round(math.log2(df_san_francisco.Salary.count()))
         sturges_age = 1 + round(math.log2(df_san_francisco.Age.count()))
