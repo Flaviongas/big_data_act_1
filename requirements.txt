@@ -1,3 +1,0 @@
-plotly
-seaborn
-scipy
